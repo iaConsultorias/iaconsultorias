@@ -1,0 +1,638 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IA Consultorías - Calidad e Inocuidad Alimentaria</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #2c5f2d;
+            --secondary: #4a9d4f;
+            --accent: #f39c12;
+            --dark: #1a1a1a;
+            --light: #f8f9fa;
+            --gray: #6c757d;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: var(--dark);
+        }
+
+        /* Header & Navigation */
+        header {
+            background: white;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+
+        nav {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--primary);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--dark);
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+        }
+
+        .menu-toggle span {
+            width: 25px;
+            height: 3px;
+            background: var(--dark);
+            margin: 3px 0;
+            transition: 0.3s;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            color: white;
+            padding: 8rem 2rem 4rem;
+            text-align: center;
+            margin-top: 60px;
+        }
+
+        .hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 0 auto 2rem;
+            opacity: 0.95;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: var(--accent);
+            color: white;
+            padding: 1rem 2rem;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+
+        /* Sections */
+        section {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+        }
+
+        h2 {
+            font-size: 2rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            color: var(--gray);
+            max-width: 800px;
+            margin: 0 auto 3rem;
+        }
+
+        /* About Section */
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+        }
+
+        .about-text h3 {
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        .about-text p {
+            margin-bottom: 1rem;
+            color: var(--gray);
+        }
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .stat-card {
+            text-align: center;
+            padding: 2rem;
+            background: var(--light);
+            border-radius: 10px;
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: var(--primary);
+        }
+
+        .stat-label {
+            color: var(--gray);
+            margin-top: 0.5rem;
+        }
+
+        /* Services Grid */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .service-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 3px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .service-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 25px rgba(0,0,0,0.15);
+        }
+
+        .service-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .service-card h3 {
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        .service-card p {
+            color: var(--gray);
+            line-height: 1.8;
+        }
+
+        /* Values Section */
+        .values-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .value-card {
+            text-align: center;
+            padding: 1.5rem;
+        }
+
+        .value-icon {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .value-card h3 {
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+            font-size: 1.1rem;
+        }
+
+        .value-card p {
+            color: var(--gray);
+            font-size: 0.95rem;
+        }
+
+        /* Contact Section */
+        .contact-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+        }
+
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+        }
+
+        .contact-icon {
+            font-size: 1.5rem;
+            color: var(--primary);
+            min-width: 30px;
+        }
+
+        .contact-details h3 {
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .contact-details p, .contact-details a {
+            color: var(--gray);
+            text-decoration: none;
+        }
+
+        .contact-details a:hover {
+            color: var(--primary);
+        }
+
+        .contact-form {
+            background: var(--light);
+            padding: 2rem;
+            border-radius: 10px;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: var(--dark);
+            font-weight: 500;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-family: inherit;
+            font-size: 1rem;
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        .submit-button {
+            width: 100%;
+            padding: 1rem;
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .submit-button:hover {
+            background: var(--secondary);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--dark);
+            color: white;
+            text-align: center;
+            padding: 2rem;
+        }
+
+        footer p {
+            opacity: 0.8;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .menu-toggle {
+                display: flex;
+            }
+
+            .nav-links {
+                position: fixed;
+                top: 60px;
+                right: -100%;
+                width: 70%;
+                height: calc(100vh - 60px);
+                background: white;
+                flex-direction: column;
+                padding: 2rem;
+                box-shadow: -2px 0 10px rgba(0,0,0,0.1);
+                transition: right 0.3s;
+            }
+
+            .nav-links.active {
+                right: 0;
+            }
+
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .hero p {
+                font-size: 1rem;
+            }
+
+            .about-content,
+            .contact-content {
+                grid-template-columns: 1fr;
+            }
+
+            .stats {
+                grid-template-columns: 1fr;
+            }
+
+            .services-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">🏢 IA Consultorías</div>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#inicio">Inicio</a></li>
+                <li><a href="#nosotros">Nosotros</a></li>
+                <li><a href="#servicios">Servicios</a></li>
+                <li><a href="#valores">Valores</a></li>
+                <li><a href="#contacto">Contacto</a></li>
+            </ul>
+            <div class="menu-toggle" id="menuToggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </nav>
+    </header>
+
+    <section class="hero" id="inicio">
+        <h1>Calidad e Inocuidad Alimentaria</h1>
+        <p>Fortalecemos los procesos de las empresas del sector alimentario para que operen bajo estándares que garanticen seguridad, confianza y sostenibilidad</p>
+        <a href="#contacto" class="cta-button">Solicita una Consulta</a>
+    </section>
+
+    <section id="nosotros">
+        <h2>¿Quiénes Somos?</h2>
+        <div class="about-content">
+            <div class="about-text">
+                <h3>Más de 10 años transformando la industria alimentaria</h3>
+                <p>IA Consultorías es una empresa especializada en asesoría técnica, formación y acompañamiento integral en sistemas de calidad e inocuidad alimentaria.</p>
+                <p>Trabajamos con un enfoque preventivo, práctico y humano, orientado a transformar la cultura organizacional desde la operación diaria hasta la alta dirección.</p>
+                <p>Cada recomendación está basada en la realidad del negocio, adaptada a su nivel de madurez, recursos y objetivos.</p>
+            </div>
+            <div class="stats">
+                <div class="stat-card">
+                    <div class="stat-number">10+</div>
+                    <div class="stat-label">Años de Experiencia</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">ISO</div>
+                    <div class="stat-label">Certificación 22000</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">100%</div>
+                    <div class="stat-label">Compromiso</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">🌎</div>
+                    <div class="stat-label">Visión Internacional</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="servicios" style="background: var(--light);">
+        <h2>Nuestros Servicios</h2>
+        <p class="section-subtitle">Soluciones modulares que se adaptan a las necesidades de tu negocio</p>
+        <div class="services-grid">
+            <div class="service-card">
+                <div class="service-icon">🔍</div>
+                <h3>Acompañamiento Técnico Mensual</h3>
+                <p>Visitas periódicas para verificar cumplimiento, revisar registros, implementar acciones correctivas y fortalecer la cultura de calidad e inocuidad.</p>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">📚</div>
+                <h3>Capacitaciones BPM & HACCP</h3>
+                <p>Programas de formación continua adaptados al perfil operativo y administrativo, promoviendo hábitos sólidos y conciencia en el equipo.</p>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">✅</div>
+                <h3>Auditorías Internas</h3>
+                <p>Evaluaciones alineadas con ISO 22000, BPM y normativas del INVIMA, identificando brechas y construyendo planes de mejora medibles.</p>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">🏗️</div>
+                <h3>Diseño de Plantas</h3>
+                <p>Asesoría técnica en planeación, distribución y flujo de procesos, garantizando cumplimiento de normas sanitarias y eficiencia operativa.</p>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">📋</div>
+                <h3>Planes HACCP</h3>
+                <p>Desarrollo de planes HACCP adaptados a legislación colombiana y estadounidense, facilitando exportación y cumplimiento normativo internacional.</p>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">🏛️</div>
+                <h3>Trámites ante INVIMA</h3>
+                <p>Gestión integral para obtención o renovación de conceptos sanitarios, registros de alimentos y ampliaciones de actividad.</p>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">👥</div>
+                <h3>Acompañamiento en Inspecciones</h3>
+                <p>Preparación, asistencia técnica y gestión de observaciones en visitas de entidades reguladoras o interventores corporativos.</p>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">💡</div>
+                <h3>Asesoría Personalizada</h3>
+                <p>Soporte continuo en implementación de planes de limpieza, control de plagas, manejo de proveedores y trazabilidad.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="valores">
+        <h2>Nuestros Valores</h2>
+        <p class="section-subtitle">Los principios que guían nuestro trabajo</p>
+        <div class="values-grid">
+            <div class="value-card">
+                <div class="value-icon">🤝</div>
+                <h3>Compromiso</h3>
+                <p>Cada cliente es una alianza de largo plazo</p>
+            </div>
+            <div class="value-card">
+                <div class="value-icon">💎</div>
+                <h3>Transparencia</h3>
+                <p>Recomendaciones claras, honestas y basadas en evidencia</p>
+            </div>
+            <div class="value-card">
+                <div class="value-icon">⭐</div>
+                <h3>Excelencia</h3>
+                <p>Buscamos siempre superar las expectativas</p>
+            </div>
+            <div class="value-card">
+                <div class="value-icon">🛡️</div>
+                <h3>Prevención</h3>
+                <p>La mejor solución es evitar el problema</p>
+            </div>
+            <div class="value-card">
+                <div class="value-icon">📖</div>
+                <h3>Educación</h3>
+                <p>El conocimiento empodera y transforma</p>
+            </div>
+            <div class="value-card">
+                <div class="value-icon">🔄</div>
+                <h3>Adaptabilidad</h3>
+                <p>Cada negocio es único, nuestras soluciones también</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="contacto" style="background: var(--light);">
+        <h2>Contacto</h2>
+        <p class="section-subtitle">¿Listo para fortalecer tu negocio? Conversemos sobre tus necesidades</p>
+        <div class="contact-content">
+            <div class="contact-info">
+                <div class="contact-item">
+                    <div class="contact-icon">📧</div>
+                    <div class="contact-details">
+                        <h3>Correo Electrónico</h3>
+                        <a href="mailto:contacto@iaconsultorias.com">contacto@iaconsultorias.com</a>
+                    </div>
+                </div>
+                <div class="contact-item">
+                    <div class="contact-icon">📱</div>
+                    <div class="contact-details">
+                        <h3>WhatsApp</h3>
+                        <a href="https://wa.me/573001234567" target="_blank">+57 300 123 4567</a>
+                    </div>
+                </div>
+                <div class="contact-item">
+                    <div class="contact-icon">📍</div>
+                    <div class="contact-details">
+                        <h3>Ubicación</h3>
+                        <p>Envigado, Antioquia, Colombia</p>
+                        <p>Consultoría presencial y remota</p>
+                    </div>
+                </div>
+                <div class="contact-item">
+                    <div class="contact-icon">⏰</div>
+                    <div class="contact-details">
+                        <h3>Horario de Atención</h3>
+                        <p>Lunes a Viernes: 8:00 AM - 6:00 PM</p>
+                        <p>Respuesta en menos de 24 horas</p>
+                    </div>
+                </div>
+            </div>
+            <div class="contact-form">
+                <form id="contactForm">
+                    <div class="form-group">
+                        <label for="name">Nombre Completo *</label>
+                        <input type="text" id="name" name="name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Correo Electrónico *</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="phone">Teléfono</label>
+                        <input type="tel" id="phone" name="phone">
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Mensaje *</label>
+                        <textarea id="message" name="message" required></textarea>
+                    </div>
+                    <button type="submit" class="submit-button">Enviar Mensaje</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2024 IA Consultorías. Todos los derechos reservados.</p>
+        <p>Calidad e Inocuidad Alimentaria | Colombia</p>
+    </footer>
+
+    <script>
+        // Menu toggle for mobile
+        const menuToggle = document.getElementById('menuToggle');
+        const navLinks = document.getElementById('navLinks');
+
+        menuToggle.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+
+        // Close menu when clicking on a link
+        navLinks.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('active');
+            });
+        });
+
+        // Form submission
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const formData = {
+                name: document.getElementById('name').value,
+                email: document.getElementById('email').value,
+                phone: document.getElementById('phone').value,
+                message: document.getElementById('message').value
+            };
+
+            alert('¡Gracias por tu mensaje! Te contactaremos pronto.\n\nNota: Para implementar el envío real, necesitarás configurar un servicio backend o usar servicios gratuitos como FormSpree, EmailJS o Netlify Forms.');
+            
+            this.reset();
+        });
+    </script>
+</body>
+</html>
